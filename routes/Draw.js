@@ -13,14 +13,6 @@ router.get("/", (req, res) => {
   let firstName = repeatChar(req.query.firstName, 8);
   let lastName = repeatChar(req.query.lastName, 8);
   res.send(`
-    <html>
-    <head>
-    
-    <title> SVG Generator </title>
-    </head>
-    
-    <body>
-
     <svg width="500" height="500">
    
     
@@ -36,11 +28,6 @@ router.get("/", (req, res) => {
     
     </g>
         </svg>
-
-    
-    </body>
-    </html>
-    
     `);
 });
 
