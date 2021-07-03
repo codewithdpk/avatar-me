@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
   let firstName = repeatChar(req.query.firstName, 8);
   let lastName = repeatChar(req.query.lastName, 8);
   res.send(`
-    <svg width="500" height="500">
+    <svg width="500" height="500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
    
     
     <style>
