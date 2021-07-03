@@ -16,6 +16,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "jsdom": "^16.6.0",
-    "nodemon": "^2.0.9"
+    "nodemon": "^2.0.9",
+    "xmlserializer": "^0.6.1"
   }
 }
