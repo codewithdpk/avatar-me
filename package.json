@@ -1,0 +1,19 @@
+{
+  "name": "svg-avatar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deepak Suthar",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "d3": "^7.0.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "jsdom": "^16.6.0",
+    "nodemon": "^2.0.9"
+  }
+}
