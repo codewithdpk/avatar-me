@@ -64,7 +64,7 @@ const draw = async (svg, res) => {
   var xml = xmlserializer.serializeToString(dom);
 
   // make it base64
-  var svg64 = await Buffer.from(xml).toString("base64");
+  var svg64 = await Buffer.from(svg).toString("base64");
   var b64Start = "data:image/svg+xml;base64,";
 
   // prepend a "header"
