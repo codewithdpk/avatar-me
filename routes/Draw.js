@@ -35,63 +35,12 @@ router.get("/", async (req, res) => {
   console.log(req.query);
   //   res.setHeader("Content-Type", "image/svg+xml");
   let formattedImage = getFormattedImage(req);
-  draw(formattedImage, res);
 
-  // let base64Image =
-  //   `data:image/jpeg;base64,` + Buffer.from(formattedImage).toString("base64");
+  let base64Image =
+    `data:image/jpeg;base64,` + Buffer.from(formattedImage).toString("base64");
 
-  // res.writeHead(200, {
-  //   "Content-Type": "image/png",
-  //   "Content-Length": base64Image.length,
-  // });
-  // res.end(base64Image);
+  res.send({ image: base64Image });
 });
-
-const draw = async (svg, res) => {
-  // var svg = document.querySelector("svg");
-  // var img = document.querySelector("img");
-  // var canvas = document.querySelector("canvas");
-
-  var canvas = Canvas.createCanvas(500, 500, "svg");
-
-  var image = Canvas.Image;
-
-  var img = new image();
-  // get svg data
-
-  var dom = parser.parse(svg);
-
-  var xml = xmlserializer.serializeToString(dom);
-
-  // make it base64
-  var svg64 = await Buffer.from(svg).toString("base64");
-  var b64Start = "data:image/svg+xml;base64,";
-
-  // prepend a "header"
-  // var image64 = b64Start + svg64;
-
-  // var ctx = canvas.getContext("2d");
-
-  // img.src = image64;
-  res.send({ image: svg64 });
-
-  // img.onload = function () {
-  //   ctx.drawImage(img, 0, 0); // Or at whatever offset you like
-  // };
-
-  // set it as the source of the img element
-
-  // res.setHeader("Content-Type", "image/png");
-  // //canvas.pngStream().pipe(res);
-  // res.send(canvas.toDataURL("image/png"));
-  //res.send(canvas);
-};
-
-{
-  /* <style>
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap")
-</style> */
-}
 
 const getRandomColor = () => {
   var trans = "0.1"; // 50% transparency
