@@ -13,6 +13,7 @@
     "canvas": "^2.8.0",
     "cors": "^2.8.5",
     "d3": "^7.0.0",
+    "dom-to-image": "^2.6.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
@@ -23,7 +24,10 @@
     "npm": "^7.19.1",
     "parse5": "^6.0.1",
     "puppeteer": "^1.6.1",
-    "svg-to-img": "^2.0.6",
+    "readable-stream": "^3.6.0",
+    "sharp": "^0.28.3",
+    "svg-to-img": "^2.0.9",
+    "svgexport": "^0.4.2",
     "xmlserializer": "^0.6.1"
   }
 }

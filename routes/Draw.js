@@ -2,46 +2,42 @@ const express = require("express");
 
 const router = express.Router();
 
-var xmlserializer = require("xmlserializer");
+const { createCanvas, registerFont } = require("canvas");
+registerFont("baloobold.ttf", { family: "Baloo 2" });
 
-var Canvas = require("node-canvas");
+const width = 600;
+const height = 600;
 
-var parser = require("parse5");
-
-function getFormattedImage(req) {
+router.get("/", (req, res) => {
   let backGroundColor = req.query.background
     ? `#${req.query.background}`
-    : getRandomColor();
+    : `#E7F7FF`;
 
-  let firstName = repeatChar(req.query.firstName, 8);
-  let lastName = repeatChar(req.query.lastName, 8);
-  let image = `
-    <svg id = "my-svg" width="500" height="500" xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"" >
-   
-    <g>
-    <rect x="10" y="50"  width="500" height="500"
-    style="fill:${backGroundColor};stroke-width:5;opacity:1" />
-    <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" style = "font-family:'Baloo 2'; font-weight:900" font-size="120" fill="#4280FD">${firstName}</text>   
-    <text x="50%" y="70%" dominant-baseline="middle" text-anchor="middle" style = "font-family:'Baloo 2'; font-weight:normal" font-size="100" fill="#3FCC5E">${lastName}</text>   
-    </g>
-    </svg>
-    `;
+  let firstName = repeatChar(req.query.firstName, 6);
+  let lastName = repeatChar(req.query.lastName, 6);
+  const canvas = createCanvas(width, height);
+  const context = canvas.getContext("2d");
 
-  return image;
-}
+  drawCanva(context, backGroundColor, firstName, lastName);
 
-router.get("/", async (req, res) => {
-  console.log(req.query);
-  //   res.setHeader("Content-Type", "image/svg+xml");
-  let formattedImage = getFormattedImage(req);
-
-  let base64Image =
-    `data:image/jpeg;base64,` + Buffer.from(formattedImage).toString("base64");
-
-  res.send({ image: base64Image });
+  res.setHeader("Content-Type", "image/png");
+  canvas.pngStream().pipe(res);
 });
 
+const drawCanva = (context, backGroundColor, firstName, lastName) => {
+  context.fillStyle = backGroundColor;
+  context.fillRect(0, 0, width, height);
+
+  context.font = "bold 130pt Baloo 2";
+  context.textAlign = "center";
+  context.fillStyle = "#4280FD";
+  context.fillText(firstName, 300, 300);
+
+  context.fillStyle = "#3FCC5E";
+  context.textAlign = "center";
+  context.font = "bold 100pt Baloo 2";
+  context.fillText(lastName, 300, 450);
+};
 const getRandomColor = () => {
   var trans = "0.1"; // 50% transparency
   var color = "rgba(";
@@ -53,7 +49,7 @@ const getRandomColor = () => {
 };
 
 const repeatChar = (ch, length) => {
-  return ch ? ch.substr(0, length) : "Demo";
+  return ch ? ch.substr(0, length) : "Store";
   //return ch.splice(1, 6);
 };
 
