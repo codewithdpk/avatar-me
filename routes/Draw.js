@@ -13,15 +13,27 @@ router.get("/", (req, res) => {
     ? `#${req.query.background}`
     : `#E7F7FF`;
 
-  let firstName = repeatChar(req.query.firstName, 6);
-  let lastName = repeatChar(req.query.lastName, 6);
-  const canvas = createCanvas(width, height);
-  const context = canvas.getContext("2d");
+  if (req.query.mode && req.query.mode == "short") {
+    let firstName = req.query.firstName.charAt(0);
+    let lastName = req.query.lastName.charAt(0);
+    const canvas = createCanvas(width, height);
+    const context = canvas.getContext("2d");
 
-  drawCanva(context, backGroundColor, firstName, lastName);
+    drawCanvaShort(context, backGroundColor, firstName, lastName);
 
-  res.setHeader("Content-Type", "image/png");
-  canvas.pngStream().pipe(res);
+    res.setHeader("Content-Type", "image/png");
+    canvas.pngStream().pipe(res);
+  } else {
+    let firstName = repeatChar(req.query.firstName, 6);
+    let lastName = repeatChar(req.query.lastName, 6);
+    const canvas = createCanvas(width, height);
+    const context = canvas.getContext("2d");
+
+    drawCanva(context, backGroundColor, firstName, lastName);
+
+    res.setHeader("Content-Type", "image/png");
+    canvas.pngStream().pipe(res);
+  }
 });
 
 const drawCanva = (context, backGroundColor, firstName, lastName) => {
@@ -37,6 +49,16 @@ const drawCanva = (context, backGroundColor, firstName, lastName) => {
   context.textAlign = "center";
   context.font = "bold 100pt Baloo 2";
   context.fillText(lastName, 300, 450);
+};
+
+const drawCanvaShort = (context, backGroundColor, firstName, lastName) => {
+  context.fillStyle = backGroundColor;
+  context.fillRect(0, 0, width, height);
+
+  context.font = "bold 240pt Open Sans";
+  context.textAlign = "center";
+  context.fillStyle = "#4280FD";
+  context.fillText(`${firstName}${lastName}`, 300, 400);
 };
 const getRandomColor = () => {
   var trans = "0.1"; // 50% transparency
