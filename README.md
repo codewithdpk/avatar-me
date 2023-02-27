@@ -2,11 +2,11 @@
 
 ## How to use
 
-Demo URL: https://auto-avatar.herokuapp.com/draw?firstName=John&lastName=Doe&mode=short&background=78dae3
+Demo URL: https://auto-avatar.onrender.com/draw?firstName=John&lastName=Doe&mode=short&background=78dae3
 
 ### Base URL
 
-https://auto-avatar.herokuapp.com/draw
+https://auto-avatar.onrender.com/draw
 
 ### Parameters
 
